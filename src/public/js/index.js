@@ -1,8 +1,6 @@
 import { cards } from "./cards.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
-
   const gameBoardDisplay = document.querySelector(".game-board");
   const alertMessageDisplay = document.querySelector(".alert-message");
   const scoreDisplay = document.querySelector(".score");
@@ -38,13 +36,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function flipCard() {
-    const cardId = this.getAttribute("data-id");
-    this.src = cards[cardId].image;
-    chosenCards.push(cards[cardId].name);
-    chosenCardIds.push(cardId);
+    const isOnCheck = chosenCards.length === 2;
+    if (!isOnCheck) {
+      const cardId = this.getAttribute("data-id");
+      this.src = cards[cardId].image;
+      chosenCards.push(cards[cardId].name);
+      chosenCardIds.push(cardId);
 
-    if (chosenCards.length === 2) {
-      setTimeout(checkForMatch, 300);
+      if (chosenCards.length === 2) {
+        setTimeout(checkForMatch, 500);
+      }
     }
   }
 
